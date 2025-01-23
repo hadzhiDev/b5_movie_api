@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}| Login{% endblock title %}
+
+{% block content %} 
+    <div class="" style="min-height: 80vh">
+        <div class="card" style="min-width: 400px"> 
+
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="">
+                    <input type="text" name="email" class="" placeholder="Enter Email" >
+                </div>
+                <div class="">
+                    <input type="password" name="password" class="" placeholder="Enter paswword" >
+                </div>
+                <div>
+                    <button type="submit" class="">Login</button>
+                </div>
+                {% if message %}
+                    <div class="">
+                        ! {{ message }}
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock content %}

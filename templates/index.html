@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %} Home{% endblock %}
+
+{% block content %} 
+    <div class='flex gap-30'>
+        <div>
+            <h1 class="hello">Все фильмы</h1>
+    
+            <div class="movies_block">
+                {% for movie in movie_list %}
+                    <div class="movie" id='movie_id_{{ movie.id }}'>
+                        <a href="{% url "movie_detail" id=movie.id %}">
+                            <img src="{{ movie.image.url }}" alt="{{ movie.name }}">
+                        </a>
+                        <div class='movie_info'>
+                            <h4>{{ movie.name }}</h4>
+                            <div class='flex'>
+                                <div>{{ movie.year }}</div>
+                                <div>{{ movie.duration }}</div>
+                            </div>
+                            <div>{{ movie.director.full_name }}</div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <h1>No Movies</h1>
+                {% endfor %}
+            </div>
+
+            {% if is_paginated %}
+                <div class="pagination">
+                    <div class="pagination_btns">
+                        {% if page_obj.has_previous %}
+                            <a class="page_link" href="?page={{ page_obj.previous_page_number }}"><</a>
+                        {% endif %}
+                        
+                        {% for i in page_obj.paginator.page_range %}
+                            {% if page_obj.number == i %}
+                                <span class="page_link">{{ i }}</span>
+                            {% else %}
+                                <a class="page_link" href="?page={{ i }}">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                            <a class="page_link" href="?page={{ page_obj.next_page_number }}">></a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <div>
+            {% include 'components/sidebar.html' %}
+        </div>
+    </div>
+{% endblock content %}

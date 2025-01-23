@@ -1,0 +1,62 @@
+{% extends "workspace/base.html" %}
+
+{% block title %} Create Movie{% endblock %}
+
+{% block work_content %}
+    <div>
+
+        <div>
+            <h1 class="hello">Все фильмы</h1>
+    
+            <div class="movies_block">
+                {% for movie in movie_list %}
+                    <div class="movie" id='movie_id_{{ movie.id }}'>
+                        <a href="{% url "movie_detail" id=movie.id %}">
+                            <img src="{{ movie.image.url }}" alt="{{ movie.name }}">
+                        </a>
+                        <div class='movie_info'>
+                            <h4>{{ movie.name }}</h4>
+                            <div class='flex'>
+                                <div>{{ movie.year }}</div>
+                                <div>{{ movie.duration }}</div>
+                            </div>
+                            <div>{{ movie.director.full_name }}</div>
+                            
+                            
+                            <div class='update_delete_btns'>
+                                <a class="nav_link" href="{% url "edit_movie" id=movie.id %}">изменить</a>
+                                <a class="nav_link" href="{% url "delete_movie" id=movie.id %}">удалить</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                {% empty %}
+                    <h1>No Movies</h1>
+                {% endfor %}
+            </div>
+
+            {% if movie_list.has_previous or movie_list.has_next %}
+                <div class="pagination">
+                    <div class="pagination_btns">
+                        {% if movie_list.has_previous %}
+                            <a class="page_link" href="?offset={{ movie_list.previous_page_number}}"><</a>
+                        {% endif %}
+                        
+                        {% for i in movie_list.paginator.page_range %}
+                            {% if movie_list.number == i %}
+                                <span class="page_link">{{ i }}</span>
+
+                            {% else %}
+                                <a class="page_link" href="?offset={{ i }}">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if movie_list.has_next %}
+                            <a class="page_link" href="?offset={{ movie_list.next_page_number}}">></a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock work_content %}

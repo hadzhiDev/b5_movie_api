@@ -1,0 +1,22 @@
+
+<div class="sidebar">
+    {% comment %} <h1>Genres</h1>
+    <div>
+        {% for genre in genre_list %}
+            <div>
+                <a href="{% url 'get_by_genres' id=genre.id %}">{{ genre.name }}</a> 
+            </div>
+        {% endfor %}
+    </div> {% endcomment %}
+    <div>
+        <form method='GET'>
+            {% comment %} {% csrf_token %} {% endcomment %}
+            {{ filter.form.as_p }}
+            <input type="hidden" name="offset" value="{{ request.GET.offset }}">
+            <button class="" type="submit">
+                Filter
+            </button>
+        </form>
+    </div>
+
+</div>

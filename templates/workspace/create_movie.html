@@ -1,0 +1,15 @@
+{% extends "workspace/base.html" %}
+
+{% block title %} Create Movie{% endblock %}
+
+{% block work_content %}
+    <div>
+        <form action="{% url 'create_movie' %}" method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div>
+                <button type='submit'>Create</button>
+            </div>
+        </form>
+    </div>
+{% endblock work_content %}

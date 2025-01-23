@@ -1,0 +1,54 @@
+{% load custom_tags %}
+{% load static %}
+
+{% get_all_genres as genres %}
+
+<header>
+
+    <div class="container header">
+        <div class="logo">
+            <h1>
+                <a class="nav_link" href="{% url 'main' %}">Movie Site</a>
+            </h1>
+        </div>
+
+        <div class="nav">
+            <a class="nav_link" href="{% url 'main' %}">Home</a>
+            <a class="nav_link" href="#">About</a>
+            <a class="nav_link" href="#">Contacts</a>
+
+            {% if request.user.is_authenticated %}
+                <a class="nav_link"  href="{% url 'logout' %}">Logout</a>
+                {% if request.user.is_superuser %}
+                    <a class="nav_link"  href="{% url 'workspace_main' %}">Workspace</a>
+                {% endif %}
+            {% else %}
+                <a class="nav_link" href="{% url 'login' %}">Login</a>  
+                <a class="nav_link"  href="{% url 'register' %}">Register</a>
+            {% endif %}
+            
+        </div>
+
+        <div class="genres_card">
+            <div>
+                <a class="text-white py-10" href="">Genre</a>
+            </div>
+            <div id="genres" class="genres hidden">
+                {% for genre in genres %}
+                    <div class="genre">
+                        <a href="{% url 'get_by_genres' id=genre.id %}">{{ genre.name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="search">
+            <form action="{% url 'main' %}" method="GET">
+                <input type="search" name="search" placeholder="search" value={{ request.GET.search }}>
+                <button type="submit">search</button>
+            </form>
+        </div>
+    </div>
+
+</header>
+

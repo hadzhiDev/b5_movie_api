@@ -1,0 +1,188 @@
+body{ 
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/static_root/images/movie_background.jpg');
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+}
+
+.container{
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+main{
+    min-height: 70vh;
+}
+
+/* Utils */
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.gap-30{
+    gap: 30px;
+}
+
+.hello{
+    text-align: center;
+    color: red;
+}
+
+.movies_block{
+    display: flex;
+    gap: 30px;
+}
+
+.movie{
+    height: 450px;
+    border: 1px solid;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.movie_info{
+    padding: 0 10px;
+}
+
+.movie img{
+    
+}
+
+.update_delete_btns{
+    display: flex;
+    justify-content: space-around;
+}
+
+.movie img{
+    width: 200px;
+}
+
+/* Movie Detail */
+
+.movie_detail{
+    display: flex;
+    gap: 40px;
+}
+
+.movie_detail div img{
+    width: 500px;
+}
+
+
+/* Header */
+
+header{
+    padding: 10px 0;
+    border: 1px solid;
+    margin-bottom: 50px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav{
+    display: flex;
+    gap: 30px;
+}
+
+.nav_link{
+    color: white;
+}
+
+.nav_link:hover{
+    color: red;
+    text-decoration: none;
+}
+
+/* Footer */
+
+footer{
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid;
+    margin-top: 50px;
+}
+
+
+/* Create Movie */
+
+.span_red{
+    color: red;
+}
+
+.create_movie{
+    text-align: center;
+    font-size: 30px;
+    padding: 10px;
+    min-width: 300px;
+}
+
+.create_movie p {
+    border-bottom: 2px solid white;
+}
+
+.create_movie p a{
+    text-decoration: none;
+}
+
+/* Sidebar */
+
+.sidebar{
+    width: 300px;
+}
+
+/* Paginator */
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.pagination_btns{
+    display: flex;
+    gap: 10px;
+}
+
+.page_link{
+    border: 1px solid white;
+    padding: 6px 10px;
+    color: white;
+    background-color:rgb(24, 24, 24);
+    text-decoration: none;
+}
+
+
+/* Workspace */
+
+.workspace_main{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/* Comments */
+
+.comment{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    align-items: end;
+}
+
+.comment_date{
+    vertical-align: bottom; 
+}

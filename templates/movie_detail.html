@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %} {{ movie.name }}{% endblock %}
+
+{% block content %}
+    <div class="movie_detail">
+        <div>
+            <img src="{{ movie.image.url }}" alt="">
+        </div>
+        <div>
+            <div>{{ movie.name }}</div>
+            <div>Год выпуска: {{ movie.year }}</div>
+            <div>Режиссёр фильма: {{ movie.director.full_name }}</div>
+            <div>Рейтинг:{{ movie.rating }}</div>
+            <div>Продолжительность: {{ movie.duration }}</div>
+            <div>Краткое содержание фильма: {{ movie.description }}</div>
+
+            <span class="font-medium">Жанр:</span>
+            {% for genre in movie.genres.all %}
+                <span>{{ genre.name }}</span>/
+            {% endfor %}
+        </div>
+        
+    </div>
+    <div>{{ movie.content|safe }}</div>
+
+    <div class="comment_container">
+        <h2>Comments</h2>
+
+        {% for comment in movie.comments.all %}
+            <div class="comment">
+                <div>
+                    <p>{{ comment.name }}</p>
+                    <p>{{ comment.text }}</p>
+                </div>
+                <div class="comment_date">
+                    {{ comment.date }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
