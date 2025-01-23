@@ -53,7 +53,6 @@ class RegisterGenericApiView(GenericAPIView):
 class ChangePasswordApiView(UpdateAPIView):
     serializer_class = ChangePasswordSerializer
     model = User
-    permission_classes = (AllowAny,)
 
     def get_object(self, queryset=None):
         obj = self.request.user
