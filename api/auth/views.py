@@ -2,10 +2,12 @@ from django.contrib.auth import authenticate
 
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, UpdateAPIView
+from rest_framework.permissions import AllowAny
 from rest_framework import status
 
-from .serializer import LoginSerializer, UserSerializer, RegisterUserSerializer
+from .serializer import LoginSerializer, UserSerializer, RegisterUserSerializer, ChangePasswordSerializer
+from accounts.models import User
 
 
 class LoginGenericAPIView(GenericAPIView):
