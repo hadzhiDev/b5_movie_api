@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.generics import (
     GenericAPIView,
     CreateAPIView,
@@ -15,9 +15,14 @@ from rest_framework.generics import (
     DestroyAPIView,
 )
 
-from .serializer import GenreSerializer, Directer, MovieSerializer, MovieReadSerializer
+from .serializer import GenreSerializer, Directer, MovieSerializer, MovieReadSerializer, MovieCreateSerializer, AtrubuteSerializer
 from .paginations import SimpleResultPagination
-from cinema.models import Genre, Movie
+from cinema.models import Genre, Movie, Atrubute
+
+
+class AtrubuteViewset(viewsets.ModelViewSet):
+    serializer_class = AtrubuteSerializer
+    queryset = Atrubute.objects.all()
 
 
 @api_view(['GET', 'POST'])
@@ -34,7 +39,7 @@ def movie_list(request):
         return paginator.get_paginated_response(serializer.data)
 
     if request.method == 'POST':
-        serializer = MovieSerializer(data=request.data)
+        serializer = MovieCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -44,7 +49,7 @@ def movie_list(request):
 class GenreListView(ListCreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
-    # pagination_class = SimpleResultPagination
+    pagination_class = SimpleResultPagination
 
 
 @api_view(['GET', 'PUT', 'PATCH', 'DELETE'])

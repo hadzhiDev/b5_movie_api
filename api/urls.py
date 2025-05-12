@@ -1,7 +1,12 @@
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+
 from . import views
 
 from .yasg import urlpatterns as url_doc
+
+router = DefaultRouter()
+router.register('atributes', views.AtrubuteViewset, basename='atributes')
 
 
 urlpatterns = [
@@ -15,7 +20,8 @@ urlpatterns = [
     path('movies/', views.movie_list, name='movie-list'),
     path('movies/<int:id>/', views.movie_detail, name='movie-detail'),
 
-    path('auth/', include('api.auth.urls'))
+    path('auth/', include('api.auth.urls')),
+    path('', include(router.urls))
 ]
 
 urlpatterns += url_doc

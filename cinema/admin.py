@@ -2,11 +2,10 @@ from django.contrib import admin
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 
-from cinema.models import Movie, Directer, Genre, Comment
+from cinema.models import Movie, Directer, Genre, Comment, Atrubute
 
 
 class MovieAdminForm(forms.ModelForm):
-
     content = forms.CharField(widget=CKEditorUploadingWidget(), label='Контент')
 
     class Meta:
@@ -19,6 +18,11 @@ class CommentStackedinline(admin.StackedInline):
     model = Comment
 
 
+class AtrubuteStackedinline(admin.StackedInline):
+    extra = 1
+    model = Atrubute
+
+
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'year', 'rating')
@@ -27,7 +31,7 @@ class MovieAdmin(admin.ModelAdmin):
     list_filter = ('year', 'genres')
     filter_horizontal = ('genres',)
     form = MovieAdminForm
-    inlines = (CommentStackedinline,)
+    inlines = (CommentStackedinline, AtrubuteStackedinline)
 
 
 @admin.register(Directer)
