@@ -25,6 +25,43 @@ class AtrubuteViewset(viewsets.ModelViewSet):
     queryset = Atrubute.objects.all()
 
 
+class MovieViewSet(viewsets.ModelViewSet):
+    serializer_class = MovieSerializer
+    queryset = Movie.objects.all()
+    pagination_class = SimpleResultPagination
+
+    def get_serializer_class(self):
+        if self.action == "create":
+            return MovieCreateSerializer
+        elif self.action == "retrieve":
+            return MovieReadSerializer
+        return super().get_serializer_class()
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @api_view(['GET', 'POST'])
 def movie_list(request):
     if request.method == 'GET':
