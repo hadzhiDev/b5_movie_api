@@ -35,7 +35,7 @@ class MovieSerializer(serializers.ModelSerializer):
 
 
 class MovieCreateSerializer(serializers.ModelSerializer):
-    atributes = AtrubuteForMovieSerializer(many=True, required=False)
+    attributes = AtrubuteForMovieSerializer(many=True, required=False)
     genres = serializers.PrimaryKeyRelatedField(
         queryset=Genre.objects.all(), many=True, required=False, allow_empty=True
     )
@@ -44,19 +44,19 @@ class MovieCreateSerializer(serializers.ModelSerializer):
         model = Movie
         fields = (
             'name', 'description', 'year', 'rating', 'duration', 'image', 
-            'director', 'genres', 'is_published', 'content', 'atributes'
+            'director', 'genres', 'is_published', 'content', 'attributes'
         )
     
     def create(self, validated_data: dict):
         print(validated_data, type(validated_data))
-        atributes = validated_data.pop("atributes", [])
+        attributes = validated_data.pop("attributes", [])
         genres = validated_data.pop("genres", [])
         print(validated_data)
 
         movie = Movie.objects.create(**validated_data)
 
-        for atribute in atributes:
-            Atrubute.objects.create(movie=movie, **atribute)
+        for attribute in attributes:
+            Atrubute.objects.create(movie=movie, **attribute)
 
         if genres:
             movie.genres.set(genres)
@@ -64,11 +64,10 @@ class MovieCreateSerializer(serializers.ModelSerializer):
         return movie
 
 
-
 class MovieReadSerializer(serializers.ModelSerializer):
     director = DirectorSerializer()  
     genres = GenreSerializer(many=True) 
-    atributes = AtrubuteSerializer(many=True, required=False)
+    attributes = AtrubuteSerializer(many=True)
 
     class Meta:
         model = Movie
